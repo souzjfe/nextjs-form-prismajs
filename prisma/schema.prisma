@@ -1,0 +1,28 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Cargo {
+  id        String @id @default(cuid())
+  nomeCargo String
+  Usuario Usuario[]
+  @@map(name: "Cargos")
+}
+
+model Usuario {
+  id             String   @id @default(cuid())
+  nomeUsuario    String?
+  email          String?  @unique
+  dataNascimento DateTime
+  cargoId        String
+  cargo          Cargo    @relation(fields: [cargoId], references: [id])
+  createdAt      DateTime @default(now()) @map(name: "created_at")
+  updatedAt      DateTime @updatedAt @map(name: "updated_at")
+
+  @@map(name: "Usuarios")
+}
