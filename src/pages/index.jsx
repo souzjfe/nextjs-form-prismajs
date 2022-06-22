@@ -143,7 +143,7 @@ export default function Home({ cargos }) {
 
 export const getStaticProps = async () => {
   const cargos = await prisma.cargo.findMany();
-  console.log(cargos);
+
   return {
     props: { cargos },
   };
