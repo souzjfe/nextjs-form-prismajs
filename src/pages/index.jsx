@@ -1,16 +1,14 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { GetServerSideProps } from "next";
+import prisma from "../lib/prisma";
 
-export default Home;
-
-function Home() {
-  // form validation rules
+export default function Home({ cargos }) {
   const validationSchema = Yup.object().shape({
-    titulo: Yup.string().required("Titulo é obrigatório"),
-    nome: Yup.string().required("Nome é obrigatório"),
-    cargo: Yup.string().required("Cargo é obrigatório"),
-    dob: Yup.string()
+    nomeUsuario: Yup.string().required("Nome é obrigatório"),
+    cargoId: Yup.string().required("Cargo é obrigatório"),
+    dataNascimento: Yup.string()
       .required("Data de nascimento é obrigatória")
       .matches(
         /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/,
@@ -27,9 +25,23 @@ function Home() {
   const { register, handleSubmit, reset, formState } = useForm(formOptions);
   const { errors } = formState;
 
-  function onSubmit(data) {
-    // display form data on success
-    alert("SUCCESS!! :-)\n\n" + JSON.stringify(data, null, 4));
+  async function onSubmit(data) {
+    delete data.acceptTerms;
+
+    const body = JSON.stringify({
+      ...data,
+      dataNascimento: new Date(data.dataNascimento + "T14:21:00+0200"),
+    });
+    try {
+      await fetch(`/api/users`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body,
+      });
+      alert("SUCCESS!! :-)\n\n" + body);
+    } catch (error) {
+      alert(error);
+    }
     return false;
   }
 
@@ -42,43 +54,46 @@ function Home() {
             <div className="form-group col">
               <label>Nome</label>
               <input
-                name="firstName"
+                name="nomeUsuario"
                 type="text"
-                {...register("firstName")}
+                {...register("nomeUsuario")}
                 className={`form-control ${
-                  errors.firstName ? "is-invalid" : ""
+                  errors.nomeUsuario ? "is-invalid" : ""
                 }`}
               />
               <div className="invalid-feedback">
-                {errors.firstName?.message}
+                {errors.nomeUsuario?.message}
               </div>
             </div>
             <div className="form-group col">
               <label>Cargo</label>
               <select
-                name="cargo"
-                {...register("cargo")}
+                name="cargoId"
+                {...register("cargoId")}
                 className={`form-control ${errors.title ? "is-invalid" : ""}`}
               >
-                <option value=""></option>
-                <option value="Mr">Mr</option>
-                <option value="Mrs">Mrs</option>
-                <option value="Miss">Miss</option>
-                <option value="Ms">Ms</option>
+                <option value="" hidden></option>
+                {cargos.map((cargo) => (
+                  <option value={cargo.id}>{cargo.nomeCargo}</option>
+                ))}
               </select>
-              <div className="invalid-feedback">{errors.cargo?.message}</div>
+              <div className="invalid-feedback">{errors.cargoId?.message}</div>
             </div>
           </div>
           <div className="form-row">
             <div className="form-group col">
               <label>Data de nascimento</label>
               <input
-                name="dob"
+                name="dataNascimento"
                 type="date"
-                {...register("dob")}
-                className={`form-control ${errors.dob ? "is-invalid" : ""}`}
+                {...register("dataNascimento")}
+                className={`form-control ${
+                  errors.dataNascimento ? "is-invalid" : ""
+                }`}
               />
-              <div className="invalid-feedback">{errors.dob?.message}</div>
+              <div className="invalid-feedback">
+                {errors.dataNascimento?.message}
+              </div>
             </div>
             <div className="form-group col">
               <label>Email</label>
@@ -125,3 +140,11 @@ function Home() {
     </div>
   );
 }
+
+export const getStaticProps = async () => {
+  const cargos = await prisma.cargo.findMany();
+  console.log(cargos);
+  return {
+    props: { cargos },
+  };
+};

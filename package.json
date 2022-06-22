@@ -19,6 +19,6 @@
   "keywords": [],
   "description": "https://jasonwatmore.com/post/2021/09/03/next-js-form-validation-example-with-react-hook-form",
   "devDependencies": {
-    "prisma": "^3.15.1"
+    "prisma": "^3.5.0"
   }
 }
