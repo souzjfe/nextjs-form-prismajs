@@ -47,7 +47,9 @@ export default function Home({ cargos }) {
 
   return (
     <div className="card m-3">
-      <h5 className="card-header">Next.js - Form Validation Example</h5>
+      <h5 className="card-header">
+        Formulário exemplo para integração a um banco de dados PostgreSQL
+      </h5>
       <div className="card-body">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-row">
@@ -70,9 +72,11 @@ export default function Home({ cargos }) {
               <select
                 name="cargoId"
                 {...register("cargoId")}
-                className={`form-control ${errors.title ? "is-invalid" : ""}`}
+                className={`form-control ${errors.cargoId ? "is-invalid" : ""}`}
               >
-                <option value="" hidden></option>
+                <option value="" hidden>
+                  Selecione um cargo
+                </option>
                 {cargos.map((cargo) => (
                   <option value={cargo.id}>{cargo.nomeCargo}</option>
                 ))}
