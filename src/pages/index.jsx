@@ -28,10 +28,14 @@ export default function Home({ cargos }) {
   async function onSubmit(data) {
     delete data.acceptTerms;
 
-    const body = JSON.stringify({
-      ...data,
-      dataNascimento: new Date(data.dataNascimento + "T14:21:00+0200"),
-    });
+    const body = JSON.stringify(
+      {
+        ...data,
+        dataNascimento: new Date(data.dataNascimento + "T14:21:00+0200"),
+      },
+      null,
+      4
+    );
     try {
       await fetch(`/api/users`, {
         method: "POST",

@@ -17,10 +17,13 @@ function App({ Component, pageProps }) {
             {/* credits */}
             <div className="text-center mt-4">
                 <p>
-                    <a href="https://jasonwatmore.com/post/2021/09/03/next-js-form-validation-example-with-react-hook-form" target="_top">Next.js - Form Validation Example with React Hook Form</a>
+                    <a href="https://jasonwatmore.com/post/2021/09/03/next-js-form-validation-example-with-react-hook-form" target="_blank">Next.js - Formulário de exemplo utilizado</a>
                 </p>
                 <p>
-                    <a href="https://jasonwatmore.com" target="_top">JasonWatmore.com</a>
+                    <a href="https://vercel.com/guides/nextjs-prisma-postgres" target="_blank">Integração Nextjs com PrismaJs</a>
+                </p>
+                <p>
+                    <a href="https://www.prisma.io/" target="_blank">PrismaJs</a>
                 </p>
             </div>
         </>
