@@ -26,9 +26,9 @@ CREATE UNIQUE INDEX "Usuarios_email_key" ON "Usuarios"("email");
 ALTER TABLE "Usuarios" ADD CONSTRAINT "Usuarios_cargoId_fkey" FOREIGN KEY ("cargoId") REFERENCES "Cargos"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 
-INSERT INTO "Cargos" values ('cl4pwiv7r000009mj81fn03kr', 'Gerente');
-INSERT INTO "Cargos" values ('cl4pwjjgw000109mj4lokedor', 'Provador de cerveja');
-INSERT INTO "Cargos" values ('cl4pwovz7000209mj3tom7661', 'Cervejeiro');
-INSERT INTO "Cargos" values ('cl4pwp5wx000409mj86fzhuy8', 'Mestre cervejeiro');
-INSERT INTO "Cargos" values ('cl4pwpg5t000509mjcl4ofdwl', 'Cervejeiro estagiário');
+INSERT INTO "Cargos" values (gen_random_uuid (), 'Gerente');
+INSERT INTO "Cargos" values (gen_random_uuid (), 'Provador de cerveja');
+INSERT INTO "Cargos" values (gen_random_uuid (), 'Cervejeiro');
+INSERT INTO "Cargos" values (gen_random_uuid (), 'Mestre cervejeiro');
+INSERT INTO "Cargos" values (gen_random_uuid (), 'Cervejeiro estagiário');
 
