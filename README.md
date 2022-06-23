@@ -1,6 +1,6 @@
 # Exemplo de formulário para integração em banco de dados PostgreSQL
 
-Desenvolvido como trablho da disciplina de banco de dados da Universidade Federal do Paraná com o ojetivo de demostrar a conectividade de uma base de dados a um sistema funcional.
+Desenvolvido como trablho da disciplina de banco de dados da Universidade Tecnológica Federal do Paraná com o ojetivo de demostrar a conectividade de uma base de dados a um sistema funcional.
 
 ## Dependências
 
@@ -10,25 +10,25 @@ Desenvolvido como trablho da disciplina de banco de dados da Universidade Federa
 
 ## Configuração inicial
 
-Basta informar os dados necessários para conexão com PostgreSQL no arquivo `.env` na raiz do projeto. Para isso caso ainda não exista adicione a variável:
+Basta informar os dados necessários para conexão com PostgreSQL. Para isso no arquivo `.env` na raiz do projeto, adicione a variável:
 
 ```env
-DATABASE_URL="postgresql://USERNAME_POSTGRE:SENHA_POSTGRE@localhost:5432/nextjs-form-prismajs?schema=public"
+DATABASE_URL="postgresql://USERNAME_POSTGRE:SENHA_POSTGRE@localhost:PORTA/nextjs-form-prismajs?schema=public"
 ```
 
-Substituindo `USERNAME_POSTGRE` e `SENHA_POSTGRE` respectivamente por usuário e senha já configurado em seu banco PostgreSQL
+Substituindo `USERNAME_POSTGRE`, `SENHA_POSTGRE` e `PORTA` respectivamente por usuário, senha e porta já configurado em seu banco PostgreSQL.
 
 ## Como iniciar o projeto
 
 1. Clone o repositório
 
-```shell
+```zsh
 git clone https://github.com/souzjfe/nextjs-form-prismajs.git
 ```
 
 2. Abra a pasta clonada
 
-```shell
+```bash
 cd nextjs-form-prismajs
 ```
 
@@ -51,3 +51,6 @@ npm run dev
 ```
 
 Acesse [localhost:3000](http://localhost:3000/)
+
+
+Enjoy!! 😊
